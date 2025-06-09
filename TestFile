@@ -1,0 +1,68 @@
+import java.util.ArrayList;
+import java.util.List;
+
+// Interface representing a Color Pair
+interface IColorPair {
+    int getIndex();
+    String getMajorColor();
+    String getMinorColor();
+}
+
+public class ColorMap {
+
+    static String[] majorColors = {"White", "Red", "Black", "Yellow", "Violet"};
+    static String[] minorColors = {"Blue", "Orange", "Green", "Brown", "Slate"};
+
+    // Concrete implementation of IColorPair
+    static class ColorPair implements IColorPair {
+        private final int index;
+        private final String major;
+        private final String minor;
+
+        public ColorPair(int index, String major, String minor) {
+            this.index = index;
+            this.major = major;
+            this.minor = minor;
+        }
+
+        @Override
+        public int getIndex() {
+            return index;
+        }
+
+        @Override
+        public String getMajorColor() {
+            return major;
+        }
+
+        @Override
+        public String getMinorColor() {
+            return minor;
+        }
+    }
+
+    // Generate color map returns list of interface type
+    public static List<IColorPair> generateColorMap() {
+        List<IColorPair> colorPairs = new ArrayList<>();
+        for (int i = 0; i < majorColors.length; i++) {
+            for (int j = 0; j < minorColors.length; j++) {
+                colorPairs.add(new ColorPair(i * 5 + j, majorColors[i], minorColors[j]));
+            }
+        }
+        return colorPairs;
+    }
+
+    // Print method uses interface type
+    public static void printColorMap(List<IColorPair> colorPairs) {
+        for (IColorPair cp : colorPairs) {
+            System.out.printf("%d | %s | %s%n", cp.getIndex(), cp.getMajorColor(), cp.getMinorColor());
+        }
+    }
+
+    public static void main(String[] args) {
+        List<IColorPair> colorPairs = generateColorMap();
+        assert colorPairs.size() == 25 : "Color pairs count should be 25";
+        printColorMap(colorPairs);
+        System.out.println("All is well (maybe!)");
+    }
+}
