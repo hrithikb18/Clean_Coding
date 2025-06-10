@@ -1,0 +1,13 @@
+public class SearchNames {
+    public static void main(String[] args) {
+        String[] names = {"Alice", "Bob", "Charlie", "David", "Eve", "Frank"};
+        char searchLetter = 'C';
+
+        for (String name : names) {
+            if (name.startsWith(String.valueOf(searchLetter))) {
+                System.out.println("Found name starting with " + searchLetter + ": " + name);
+                // break; // uncomment if you want to stop after first match
+            }
+        }
+    }
+}
